@@ -117,7 +117,7 @@
       Message: document.getElementById("message-to-send").value
     };
 
-    fetch('/sms', {
+    fetch('/sms/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'

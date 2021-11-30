@@ -117,6 +117,13 @@ exports.smsEmpty = function smsEmpty(req, res) {
   return twiml.toString();
 };
 
+exports.smsPlain = function smsPlain(req, res) {
+  console.log(req.path);
+  console.log(req.body);
+  const twiml = new MessagingResponse();
+  return twiml.toString();
+};
+
 /**
 * Checks if the given value is valid as phone number
 * @param {Number|String} number
