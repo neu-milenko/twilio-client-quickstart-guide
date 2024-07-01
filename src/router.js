@@ -3,7 +3,8 @@ const {tokenGenerator,
   voiceResponse,
   smsRequest,
   smsResponse,
-  smsEmpty} = require('./handler');
+  smsEmpty,
+  smsPlain} = require('./handler');
 
 const router = new Router();
 
@@ -65,11 +66,16 @@ router.post('/sms/status', (req, res) => {
   res.sendStatus(200);
 });
 
-router.post('/sms', async (req, res) => {
+router.post('/sms/send', async (req, res) => {
   const message = await smsRequest(req, res);
   console.log(message);
   res.set('Content-Type', 'text/plain');
   res.send(message.sid);
+});
+
+router.post('/sms', async (req, res) => {
+  res.set('Content-Type', 'text/xml');
+  res.send(smsPlain(req, res));
 });
 
 router.ws('/', function(ws, _req) {
